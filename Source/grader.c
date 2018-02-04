@@ -278,6 +278,18 @@ int main()
         fprintf(master_results, "\n"); 
     }
 
+    //get total average
+    float classAverage=0;
+    for(i=1;i<=numQs;i++)
+    {
+    	classAverage += questionStats[3][i];
+    }
+    classAverage /= numQs;
+    line();
+    printf("Quiz average was %.2f%%.\n", classAverage);
+    fprintf(master_results, "--------------------\n");
+    fprintf(master_results, "Quiz average was: %.2f%%.\n", classAverage);
+
     line();
     printf("Overall results saved to %s!\n", gradeFile);
     printf("Press ENTER to exit Grader.\n");
