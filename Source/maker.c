@@ -85,7 +85,7 @@ int main()
 
 		//get number of answers for question
 		int numAs;
-		printf("How many answers for question %d: ", i);
+		printf("How many answers for question %d (max 99): ", i);
 		scanf("%d", &numAs);
 		
 		//loop for number of answers
