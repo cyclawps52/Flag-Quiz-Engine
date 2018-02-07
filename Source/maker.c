@@ -33,8 +33,8 @@ int main()
 	//add .quizfile extension to string
 	strcat(quizName, ".quizfile");
 
-	//opening file stream r/w with binary
-	fp = fopen(quizName, "w+b");
+	//opening file stream r/w
+	fp = fopen(quizName, "w+");
 	if(fp==NULL)
 	{
 		printf("There was an error creating the quiz file.\n");

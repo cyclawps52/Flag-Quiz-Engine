@@ -42,8 +42,8 @@ int main()
     //add .quizfile extension to string
     strcat(quizName, ".quizfile");
 
-    //opening quiz file stream r with binary
-    quiz = fopen(quizName, "r+b");
+    //opening quiz file stream r
+    quiz = fopen(quizName, "r+");
     if(quiz==NULL)
     {
         printf("There was an error opening the quiz file.\n");
@@ -122,8 +122,8 @@ int main()
         strcpy(fileString, resultsDir);
         strcat(fileString, in_file->d_name);
 
-        //open file in rb mode and check
-        current_file = fopen(fileString, "r+b");
+        //open file in r+ mode and check
+        current_file = fopen(fileString, "r+");
         if (current_file == NULL)
         {
             printf("Error: Failed to open file %s!\n", in_file->d_name);
@@ -153,7 +153,7 @@ int main()
         studentID[studentIDLen-11] = '\0';
         strcat(studentID, "grade");
         FILE* lone_results;
-        lone_results = fopen(studentID, "w+b");
+        lone_results = fopen(studentID, "w+");
         if(lone_results == NULL)
         {
             printf("Error: Failed to create %s\n", studentID);

@@ -57,8 +57,8 @@ int main()
 	//add .quizfile extension to string
 	strcat(quizName, ".quizfile");
 
-	//opening quiz file stream r with binary
-	quiz = fopen(quizName, "r+b");
+	//opening quiz file stream r+
+	quiz = fopen(quizName, "r+");
 	if(quiz==NULL)
 	{
 		printf("There was an error opening the quiz file.\n");
@@ -89,7 +89,7 @@ int main()
 
 	//check if student has taken the test already
 	//if so, will exit with error
-	results = fopen(resultsName ,"rb");
+	results = fopen(resultsName ,"r");
 	if(results!=NULL)
 	{
 		printf("A results file already exists for:\n");
@@ -101,8 +101,8 @@ int main()
 		return 1;
 	}
 
-	//opening results file stream w with binary
-	results = fopen(resultsName, "wb");
+	//opening results file stream w
+	results = fopen(resultsName, "w");
 	if(results==NULL)
 	{
 		printf("There was an error creating a file to store results.\n");
