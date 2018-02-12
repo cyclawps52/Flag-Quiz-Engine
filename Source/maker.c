@@ -73,6 +73,7 @@ int main()
 
 	//write number of questions to file
 	fprintf(fp, "N: %d\n", numQs);
+	//fwrite();
 
 	//loop for number of questions
 	int i;
