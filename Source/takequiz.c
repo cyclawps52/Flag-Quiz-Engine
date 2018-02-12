@@ -67,6 +67,9 @@ int main()
 		return 1;
 	}
 
+	//create results directory
+	make_directory("results");
+
 	//create subdirectory for results
 	char resultsDir[250] = "results/";
 	strcat(resultsDir, temp);

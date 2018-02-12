@@ -18,6 +18,16 @@ void line()
 	printf("----------------------------------\n");
 }
 
+void make_directory(const char* name) 
+{
+    #if defined __linux__ || defined(__unix__) || defined(__APPLE__)
+        mkdir(name, 777); 
+    #endif
+    #if defined(_WIN32) || defined(_WIN64)
+        _mkdir(name);
+    #endif
+}
+
 int main()
 {
 	//declaring file pointer
@@ -32,6 +42,9 @@ int main()
 
 	//add .quizfile extension to string
 	strcat(quizName, ".quizfile");
+
+	//make quiz directory
+	make_directory("quizes");
 
 	//opening file stream r/w
 	fp = fopen(quizName, "w+");

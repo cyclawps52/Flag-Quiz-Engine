@@ -71,6 +71,9 @@ int main()
         }
     }
 
+    //create grades directory
+    make_directory("grades");
+
 	//create a grades/quizname/overall.grade file to store calculations
     char gradeFile[300]="grades/";
     strcat(gradeFile, temp);
