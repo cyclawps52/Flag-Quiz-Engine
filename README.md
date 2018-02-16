@@ -31,8 +31,6 @@ Quizes are limited to multiple-choice format (ie: one of the answers is correct 
 ## Quiz Engine
 The quiz engine runs the selected quiz. It will create a subdirectory inside the results/ folder per quiz. 
 
-The netcat scripts will start a listener on port 7849 (QUIZ in T9 keyboard) that will accept multiple connections and can handle multiple quizes/users at once.
-
 Additionally, quiztakers will enter a unique username. The engine will not allow the same username to take the same quiz over again unless the teacher goes in and deletes the user's .quizresults file.
 
 At the end of the quiz, the user will see their total score as a straight number as well as a percentage. If the quiz contained a flag and the user met the minimum threshold, the flag will also be displayed.
