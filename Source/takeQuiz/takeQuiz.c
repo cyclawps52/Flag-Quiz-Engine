@@ -3,40 +3,11 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
-	#include <unistd.h>
-#endif
-#if defined(_WIN32) || defined(_WIN64)
-	#include <direct.h>
-#endif
 
-void clear()
-{
-    #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
-        system("clear");
-    #endif
+#include "../custom/custom.h"
+#include "takeQuiz.h"
 
-    #if defined(_WIN32) || defined(_WIN64)
-        system("cls");
-    #endif
-}
-
-void make_directory(const char* name) 
-{
-	#if defined __linux__ || defined(__unix__) || defined(__APPLE__)
-		mkdir(name, 777); 
-	#endif
-	#if defined(_WIN32) || defined(_WIN64)
-		_mkdir(name);
-	#endif
-}
-
-void line()
-{
-	printf("----------------------------------\n");
-}
-
-int main()
+int takeQuiz()
 {
 	setbuf(stdout, NULL);
 
@@ -48,7 +19,7 @@ int main()
 	char quizName[140]="quizes/";
 	char temp[100];
 	printf("What quiz do you want to run(100 char max): ");
-	fflush(stdout);
+	fflush(stdin);
 	fgets(temp, 100, stdin);
 	strtok(temp, "\n");
 	strcat(quizName, temp);
@@ -63,7 +34,6 @@ int main()
 	{
 		printf("There was an error opening the quiz file.\n");
 		printf("Program is exiting.\n");
-		fflush(stdout);
 		return 1;
 	}
 
@@ -79,7 +49,7 @@ int main()
 	//get student name
 	char studentID[100];
 	printf("Enter student ID (max 100 char): ");
-	fflush(stdout);
+	fflush(stdin);
 	fgets(studentID, 100, stdin);
 	strtok(studentID, "\n");
 
@@ -99,7 +69,6 @@ int main()
 		printf("\tStudentID: %s\n", studentID);
 		printf("\tQuiz: %s\n", temp);
 		printf("If this is in error, please contact the administrator.\n");
-		fflush(stdout);
 		fclose(results);
 		return 1;
 	}
@@ -110,7 +79,6 @@ int main()
 	{
 		printf("There was an error creating a file to store results.\n");
 		printf("Program is exiting.\n");
-		fflush(stdout);
 		return 1;
 	}
 
@@ -135,12 +103,10 @@ int main()
 		if(i==1)
 		{
 			printf("Question %d of %d:\n%s", i, numQs, buffer);
-			fflush(stdout);
 		}
 		else
 		{
 			printf("Question %d of %d: %s", i, numQs, buffer);
-			fflush(stdout);
 		}
 		
 		//Display answer options
@@ -149,8 +115,7 @@ int main()
 		{
 			cPos = ftell(quiz); //catches position of C: line
 			char *answerBuffer = buffer + 3;
-			printf("%s", answerBuffer);
-			fflush(stdout); 
+			printf("%s", answerBuffer); 
 			fgets(buffer, 225, quiz);
 		} while(strstr(buffer, "C: ") == NULL);
 
@@ -164,7 +129,7 @@ int main()
 		int userAns;
 		char userAnsTemp[5];
 		printf("Select an answer: ");
-		fflush(stdout);
+		fflush(stdin);
 		fgets(userAnsTemp, 5, stdin);
 		userAns = atoi(userAnsTemp);
 
@@ -185,8 +150,6 @@ int main()
 		fprintf(results, "X: %d\n", correctAns); //prints expected answer to file
 
 		fprintf(results, "E: \n"); //question end mark
-		fflush(stdout);
-		fflush(stdin);
 	}
 
 	//get flag information
@@ -225,7 +188,6 @@ int main()
 		line();
 	}
 	printf("Press ENTER to exit.\n");
-	fflush(stdout);
 	fflush(stdin);
 	getchar();
 

@@ -3,22 +3,10 @@
 #include <string.h>
 #include <dirent.h>
 
-void line()
-{
-    printf("----------------------------------\n");
-}
+#include "../custom/custom.h"
+#include "grader.h"
 
-void make_directory(const char* name) 
-{
-    #if defined __linux__ || defined(__unix__) || defined(__APPLE__)
-        mkdir(name, 777); 
-    #endif
-    #if defined(_WIN32) || defined(_WIN64)
-        _mkdir(name);
-    #endif
-}
-
-int main()
+int grader()
 {
 	//variables used for directory reading
 	DIR* FD;
@@ -193,7 +181,7 @@ int main()
 
                 //see if answer was right or wrong
                 fgets(buffer, 250, current_file);
-                fseek(current_file, -2, SEEK_CUR);
+                fseek(current_file, 2, SEEK_CUR);
                 int questionStatus = atoi(fgets(buffer, 225, current_file));
 
                 if(questionStatus==1)
