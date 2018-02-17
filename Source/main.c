@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #include "custom/custom.h"
 #include "grader/grader.h"
 #include "maker/maker.h"
@@ -14,9 +15,17 @@ int main()
 		printf("1. Make Quiz\n");
 		printf("2. Take Quiz\n");
 		printf("3. Grade Quiz\n");
+		printf("0. Quit Program\n");
 		printf("\t\tChoice: ");
 		fflush(stdin);
-		scanf("%d", &menu);
+		if(scanf("%d", &menu) == 0)
+		{
+			printf("Invalid choice, press enter to retry.\n");
+			fflush(stdin);
+			getchar();
+			fflush(stdin);
+			menu = -1;
+		}
 
 		switch(menu)
 		{
@@ -29,6 +38,15 @@ int main()
 			case 3:
 				grader();
 				break;
+			case 0:
+				return 0;
+				break;
+			case -1:
+				break;
+			default:
+				printf("Invalid choice, press enter to retry.\n");
+				fflush(stdin);
+				getchar();
 		}
 	}
 	

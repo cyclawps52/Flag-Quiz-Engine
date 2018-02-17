@@ -9,7 +9,7 @@
 
 int takeQuiz()
 {
-	setbuf(stdout, NULL);
+	clear();
 
 	//declaring file pointers
 	FILE *quiz;
