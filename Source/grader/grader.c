@@ -181,7 +181,7 @@ int grader()
 
                 //see if answer was right or wrong
                 fgets(buffer, 250, current_file);
-                fseek(current_file, 2, SEEK_CUR);
+                fseek(current_file, -3, SEEK_CUR);
                 int questionStatus = atoi(fgets(buffer, 225, current_file));
 
                 if(questionStatus==1)
