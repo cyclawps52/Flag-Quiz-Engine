@@ -8,10 +8,9 @@ This project consists of three main parts:
  
 The current timeline of planned features is as follows:
 
- 1. Test Dumper - This would dump the questions from the test into the student grade files so they could see what the text of the questions were along with the results. It will also dump the test questions into a separate overall file for the teacher (not the same overall.grade file).
- 2. True User Login Support - This would have logins for students and teachers so they could only access the tools necessary for their role. This leads into the Student Grade Viewer. The end goal is to have better protection on usernames.
- 3. Student Grade Viewer - This would allow the students to see their grade file from the console in order to minimize the number of files to distribute.
- 4. Teacher Deletion Mechanic - This would allow the teacher to delete quizes, results, and grades from the console without having to go into the server itself.
+ 1. True User Login Support - This would have logins for students and teachers so they could only access the tools necessary for their role. This leads into the Student Grade Viewer. The end goal is to have better protection on usernames.
+ 2. Student Grade Viewer - This would allow the students to see their grade file from the console in order to minimize the number of files to distribute.
+ 3. Teacher Deletion Mechanic - This would allow the teacher to delete quizes, results, and grades from the console without having to go into the server itself.
 
 ## Quiz Maker
 
@@ -41,9 +40,11 @@ At the end of the quiz, the user will see their total score as a straight number
 ## Quiz Grader
 The quiz grader will generate individual grade files as well as an overall file for the selected quiz. It will create a subdirectory inside the grades/ folder per quiz. 
 
-The individual grade file will display whether the student got the question right or wrong. If wrong, the file will display what answer was expected as well as the user's inputted answer.
+The individual grade file will display whether the student got the question right or wrong. If wrong, the file will display what answer was expected as well as the user's inputted answer. The student grade files will also display the questions and answers so the student can recall what the quiz was.
 
 The overall grade file will display all user IDs with their scores displayed as straight numbers as well as percentages. At the end of the file, a table will be outputted with statistics per question. This table includes how many students got the question right, wrong, and the percentage correct for each question. The file will also include the total quiz average across all students.
+
+The grader also outputs a testDump.grade file with the questions and answers from the quiz into the grades/quizname/ directory. This can be used if the teacher wants to read the quiz in an easier format.
 
 [The source code for the quiz grader can be found here.](https://github.com/cyclawps52/Flag-Quiz-Engine/blob/master/Source/grader/grader.c)
 
