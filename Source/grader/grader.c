@@ -8,6 +8,8 @@
 
 int grader()
 {
+    clear();
+    
 	//variables used for directory reading
 	DIR* FD;
     struct dirent* in_file;
@@ -72,6 +74,22 @@ int grader()
     if (master_results == NULL)
     {
         fprintf(stderr, "Error: Failed to create %s\n", gradeFile);
+        printf("Press ENTER to close Grader.\n");
+        fflush(stdin);
+        getchar();
+        return 1;
+    }
+
+    //create a grades/quizname/testDump.grade file to store the test
+    FILE* dumpFP;
+    char dumpFile[300]="grades/";
+    strcat(dumpFile, temp);
+    strcat(dumpFile, "/");
+    strcat(dumpFile, "testDump.grade");
+    dumpFP = fopen(dumpFile, "w");
+    if (dumpFP == NULL)
+    {
+        fprintf(stderr, "Error: Failed to create %s\n", dumpFile);
         printf("Press ENTER to close Grader.\n");
         fflush(stdin);
         getchar();
@@ -155,9 +173,8 @@ int grader()
             fclose(master_results);
             return 1;
         }
-        
 
-        //trim B: line off
+        //trim B: line off results file
         int cPos = ftell(current_file);
         fgets(buffer, 250, current_file);
 
@@ -168,6 +185,37 @@ int grader()
         //loop through entire file and print to screen
         while (fgets(buffer, 250, current_file) != NULL)
         {
+            //get question from quiz file
+            char quizbuffer[300];
+            while(strstr(quizbuffer, "Q: ") == NULL && strstr(quizbuffer, "EEE") == NULL)
+            {
+                fgets(quizbuffer, 250, quiz);  
+            }
+            if(strstr(quizbuffer, "Q: ") != NULL)
+            {
+                char *truebuffer = quizbuffer +3;
+                fprintf(lone_results, "%s", truebuffer);
+                fprintf(dumpFP, "--------------------------------\n");
+                fprintf(dumpFP, "%s", truebuffer);
+                fgets(quizbuffer, 250, quiz);
+            }
+
+            //get answers from quiz file
+            while(strstr(quizbuffer, "C: ") == NULL && strstr(quizbuffer, "EEE") == NULL)
+            {
+                while(strstr(quizbuffer, "A. ") == NULL && strstr(quizbuffer, "EEE") == NULL)
+                {
+                    fgets(quizbuffer, 250, quiz);  
+                }
+                if(strstr(quizbuffer, "A. ") != NULL)
+                {
+                    char *truebuffer = quizbuffer +3;
+                    fprintf(lone_results, "%s", truebuffer);
+                    fprintf(dumpFP, "\t%s", truebuffer);
+                    fgets(quizbuffer, 250, quiz);
+                }
+            }
+            
             //get question number
             if (strstr(buffer, "Q: ") != NULL)
             {
@@ -188,7 +236,7 @@ int grader()
                 {
                     questionStats[1][questionNum]++;
                     studentCorrect++;
-                    fprintf(lone_results, "Question %d: Correct!\n", questionNum);
+                    fprintf(lone_results, "\tQuestion %d: Correct!\n", questionNum);
                 }
                 else
                 {
@@ -200,14 +248,14 @@ int grader()
                     fseek(current_file, -3, SEEK_CUR);
                     int expectedAns = atoi(fgets(buffer, 250, current_file));
                     questionStats[2][questionNum]++;
-                    fprintf(lone_results, "Question %d: Wrong! Expected %d but received %d\n", questionNum, expectedAns, studentAns);
+                    fprintf(lone_results, "\tQuestion %d: Wrong! Expected %d but received %d\n", questionNum, expectedAns, studentAns);
                 }
-            }   
+                fprintf(lone_results, "--------------------------------\n");
+            } 
         }
 
         //print score and percent to individual file
         studentAverage = (float) studentCorrect / numQs * 100;
-        fprintf(lone_results, "--------------------------------\n");
         fprintf(lone_results, "Score: %d out of %d\n", studentCorrect, numQs);
         fprintf(lone_results, "Percentage: %.2f%%\n", studentAverage);
 
@@ -288,6 +336,7 @@ int grader()
     getchar();
 
     //closing streams
+    fclose(dumpFP);
     fclose(master_results);
     fclose(quiz);
 	return 0;

@@ -7,6 +7,8 @@
 
 int maker()
 {
+	clear();
+	
 	//declaring file pointer
 	FILE *fp;
 
@@ -145,6 +147,9 @@ int maker()
 			printf("Not a valid option, defaulting to no flag.\n");
 			fprintf(fp, "F: 0\n");
 	}
+
+	//print end mark to quiz
+	fprintf(fp, "EEE");
 
 	clear();
 	printf("Test file created and saved as: %s\n", quizName);
