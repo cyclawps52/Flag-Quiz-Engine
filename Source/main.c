@@ -30,6 +30,7 @@ int main()
 		//IN PROGRESS
 		printf("4. Add User\n");
 		printf("5. Retrieve Password Interface\n");
+		printf("6. Check User Privilages\n");
 
 		//DEBUG
 		
@@ -66,6 +67,9 @@ int main()
 				break;
 			case 5:
 				retrievePassword2();
+				break;
+			case 6:
+				checkTeacher2();
 				break;
 
 			//DEBUG
