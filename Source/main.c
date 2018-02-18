@@ -1,9 +1,14 @@
+//STANDARD
 #include <stdio.h>
 
+//PUSHED FEATURES
 #include "custom/custom.h"
 #include "grader/grader.h"
 #include "maker/maker.h"
 #include "takeQuiz/takeQuiz.h"
+
+//DEBUG
+#include "password/password.h"
 
 int main()
 {
@@ -15,6 +20,7 @@ int main()
 		printf("1. Make Quiz\n");
 		printf("2. Take Quiz\n");
 		printf("3. Grade Quiz\n");
+		printf("4: DEBUG: Password\n");
 		printf("0. Quit Program\n");
 		printf("\t\tChoice: ");
 		fflush(stdin);
@@ -37,6 +43,9 @@ int main()
 				break;
 			case 3:
 				grader();
+				break;
+			case 4:
+				password();
 				break;
 			case 0:
 				return 0;
