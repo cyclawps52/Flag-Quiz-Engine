@@ -4,5 +4,6 @@
 void line();
 void make_directory(const char* name);
 void clear();
+void pete();
 
 #endif 
