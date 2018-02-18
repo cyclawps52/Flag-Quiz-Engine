@@ -17,7 +17,11 @@
 //MAIN
 int main()
 {
+	setbuf(stdout, NULL);
 	int menu;
+
+	clear();
+	checkIfFirstRun();
 	
 	while(1)
 	{
