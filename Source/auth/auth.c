@@ -154,7 +154,7 @@ int firstRunTeacher()
 }
 
 //returns permission value of login
-int login()
+int login(char carryID[])
 {
 	clear();
 
@@ -165,6 +165,7 @@ int login()
 	fgets(userID, 100, stdin);
 	char userIDLen = strlen(userID);
 	userID[userIDLen-1] = '\0';
+	strcpy(carryID, userID);
 
 	//check if userID exists
 	char userIDPath[150] = "users/";

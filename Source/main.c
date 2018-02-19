@@ -1,6 +1,7 @@
 //STANDARD
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 //PUSHED FEATURES
 #include "custom/custom.h"
@@ -19,6 +20,7 @@ int main()
 {
 	setbuf(stdout, NULL);
 	int menu;
+	char carryID[100]="NULL";
 
 	int permissionLevel = -1;
 
@@ -28,6 +30,18 @@ int main()
 	while(1)
 	{
 		clear();
+
+		if(strcmp(carryID, "NULL") == 0)
+		{
+			printf("No user logged in!\n");
+			line();
+		}
+		else
+		{
+			printf("Logged in as: %s\n", carryID);
+			line();
+		}
+
 		int menuChoice;
 
 		if(permissionLevel == -1)
@@ -45,7 +59,7 @@ int main()
 			switch(menuChoice)
 			{
 				case 1:
-					permissionLevel = login();
+					permissionLevel = login(carryID);
 					break;
 				case 0:
 					return 0;
@@ -80,6 +94,7 @@ int main()
 					break;
 				case 0:
 					permissionLevel = -1;
+					strcpy(carryID, "NULL\0");
 					break;
 				case 1337:
 					break;
@@ -122,6 +137,7 @@ int main()
 					break;
 				case 0:
 					permissionLevel = -1;
+					strcpy(carryID, "NULL\0");
 					break;
 				case 1337:
 					break;
