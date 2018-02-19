@@ -181,6 +181,7 @@ int grader()
         //declaring persistent counter variables
         int studentCorrect=0;
         float studentAverage=0;
+        int questionNum=1;
 
         //loop through entire file and print to screen
         while (fgets(buffer, 250, current_file) != NULL)
@@ -195,6 +196,8 @@ int grader()
             {
                 char *truebuffer = quizbuffer +3;
                 fprintf(dumpFP, "--------------------------------\n");
+                fprintf(dumpFP, "Question %d:\n", questionNum);
+                questionNum++;
                 fprintf(dumpFP, "%s", truebuffer);
                 fgets(quizbuffer, 250, quiz);
             }
@@ -218,7 +221,7 @@ int grader()
             if (strstr(buffer, "Q: ") != NULL)
             {
                 cPos = ftell(current_file);
-                fseek(current_file, cPos-3, SEEK_SET);
+                fseek(current_file, cPos-4, SEEK_SET);
                 int questionNum = atoi(fgets(buffer, 225, current_file));
                 cPos = ftell(current_file);
 
@@ -227,7 +230,7 @@ int grader()
 
                 //see if answer was right or wrong
                 fgets(buffer, 250, current_file);
-                fseek(current_file, -3, SEEK_CUR);
+                fseek(current_file, -4, SEEK_CUR);
                 int questionStatus = atoi(fgets(buffer, 225, current_file));
 
                 if(questionStatus==1)
@@ -240,10 +243,10 @@ int grader()
                 {
                     //get studentAns and expectedAns
                     fgets(buffer, 250, current_file);
-                    fseek(current_file, -3, SEEK_CUR);
+                    fseek(current_file, -4, SEEK_CUR);
                     int studentAns = atoi(fgets(buffer, 250, current_file));
                     fgets(buffer, 250, current_file);
-                    fseek(current_file, -3, SEEK_CUR);
+                    fseek(current_file, -4, SEEK_CUR);
                     int expectedAns = atoi(fgets(buffer, 250, current_file));
                     questionStats[2][questionNum]++;
                     fprintf(lone_results, "\tQuestion %d: Wrong! Expected %d but received %d\n", questionNum, expectedAns, studentAns);
@@ -275,44 +278,95 @@ int grader()
         questionStats[3][i] = questionStats[1][i] / numStudents * 100;
     }
 
-    //print questionStats to overall.grade
-    fprintf(master_results, "--------------------\n");
-    for(i=0;i<4;i++)
+    //print questionStats to overall.grade in table format if questions <=10
+    if(numQs<=10)
     {
-        switch(i)
+        fprintf(master_results, "--------------------\n");
+        for(i=0;i<4;i++)
         {
-            case 0: 
-                printf("Question:\t");
-                fprintf(master_results, "Question:\t"); 
-                break;
-            case 1: 
-                printf("Correct :\t"); 
-                fprintf(master_results, "Correct :\t"); 
-                break;
-            case 2: 
-                printf("Wrong   :\t"); 
-                fprintf(master_results, "Wrong   :\t"); 
-                break;
-            case 3: 
-                printf("Percent :\t"); 
-                fprintf(master_results, "Percent :\t"); 
-                break;
+            switch(i)
+            {
+                case 0:
+                    fprintf(master_results, "Question:\t"); 
+                    break;
+                case 1: 
+                    fprintf(master_results, "Correct :\t"); 
+                    break;
+                case 2: 
+                    fprintf(master_results, "Wrong   :\t"); 
+                    break;
+                case 3: 
+                    fprintf(master_results, "Percent :\t"); 
+                    break;
+            }
+            for(j=1;j<numQs+1;j++)
+            {
+                if(i==3)
+                {
+                    fprintf(master_results, "%.2f%%\t", questionStats[i][j]); 
+                }
+                else
+                {
+                    fprintf(master_results, "%.2f\t", questionStats[i][j]); 
+                }
+            }
+            fprintf(master_results, "\n"); 
         }
-        for(j=1;j<numQs+1;j++)
+    }
+    else
+    {
+        //print questionStats to overall.grade in list format
+        fprintf(master_results, "--------------------\n");
+        for(i=1;i<numQs+1;i++)
         {
-            if(i==3)
-            {
-                printf("%.2f%%\t", questionStats[i][j]);
-                fprintf(master_results, "%.2f%%\t", questionStats[i][j]); 
-            }
-            else
-            {
-                printf("%.2f\t", questionStats[i][j]);
-                fprintf(master_results, "%.2f\t", questionStats[i][j]); 
-            }
+            fprintf(master_results, "Question: %.2f\n", questionStats[0][i]); 
+            fprintf(master_results, "\tCorrect: %.2f\n", questionStats[1][i]); 
+            fprintf(master_results, "\tWrong: %.2f\n", questionStats[2][i]); 
+            fprintf(master_results, "\tPercent: %.2f%%\n", questionStats[3][i]); 
+                    
+            fprintf(master_results, "\n"); 
         }
-        printf("\n");
-        fprintf(master_results, "\n"); 
+    }
+    
+
+    //print questionStats to screen if questions <=10
+    if(numQs<=10)
+    {
+       for(i=0;i<4;i++)
+        {
+            switch(i)
+            {
+                case 0: 
+                    printf("Question:\t");
+                    break;
+                case 1: 
+                    printf("Correct :\t"); 
+                    break;
+                case 2: 
+                    printf("Wrong   :\t"); 
+                    break;
+                case 3: 
+                    printf("Percent :\t"); 
+                    break;
+            }
+            for(j=1;j<numQs+1;j++)
+            {
+                if(i==3)
+                {
+                    printf("%.2f%%\t", questionStats[i][j]);
+                }
+                else
+                {
+                    printf("%.2f\t", questionStats[i][j]);
+                }
+            }
+            printf("\n");
+        } 
+    }
+    else
+    {
+        printf("There is more than 10 questions in this quiz.\n");
+        printf("Individual question results table printed to file only.\n");
     }
 
     //get total average

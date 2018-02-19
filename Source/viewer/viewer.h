@@ -2,6 +2,11 @@
 #define VIEWER_H
 
 int gradeViewer(char carryID[]);
-int testViewer(char carryID[]);
+int gradeViewerTeacher();
+
+int dumpViewer(char carryID[]);
+int dumpViewerTeacher();
+
+int overallViewerTeacher();
 
 #endif

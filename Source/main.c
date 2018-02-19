@@ -8,10 +8,11 @@
 #include "grader/grader.h"
 #include "maker/maker.h"
 #include "takeQuiz/takeQuiz.h"
-
-//IN PROGRESS
 #include "auth/auth.h"
 #include "viewer/viewer.h"
+
+//IN PROGRESS
+
 
 //DEBUG
 
@@ -56,6 +57,8 @@ int main()
 					break;
 				case 0:
 					return 0;
+				case 1337:
+					break;
 				default:
 					printf("Invalid option!\n");
 					printf("Press ENTER to retry.\n");
@@ -70,6 +73,7 @@ int main()
 
 			printf("1. Take Quiz\n");
 			printf("2. Check Grade\n");
+			printf("3. View Quiz Dump\n");
 			printf("0. Logout\n");
 			if(scanf("%d", &menuChoice) == 0)
 			{
@@ -87,6 +91,9 @@ int main()
 					break;
 				case 2:
 					gradeViewer(carryID);
+					break;
+				case 3:
+					dumpViewer(carryID);
 					break;
 				case 0:
 					permissionLevel = -1;
@@ -109,8 +116,12 @@ int main()
 
 			printf("1. Create Quiz\n");
 			printf("2. Grade Quiz\n");
-			printf("3. Create User\n");
-			printf("4. Retrieve User Password\n");
+			printf("3. View Quiz Dump\n");
+			printf("4. View Overall Quiz Grade\n");
+			printf("5. Check Student Grade\n");
+			printf("6. Create User\n");
+			printf("7. Retrieve User Password\n");
+			
 			printf("0. Logout\n");
 			if(scanf("%d", &menuChoice) == 0)
 			{
@@ -130,9 +141,18 @@ int main()
 					grader();
 					break;
 				case 3:
-					addUser();
+					dumpViewerTeacher();
 					break;
 				case 4:
+					overallViewerTeacher();
+					break;
+				case 5:
+					gradeViewerTeacher();
+					break;
+				case 6:
+					addUser();
+					break;
+				case 7:
 					retrievePasswordManual();
 					break;
 				case 0:
