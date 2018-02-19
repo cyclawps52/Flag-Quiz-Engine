@@ -20,12 +20,17 @@ int main()
 	setbuf(stdout, NULL);
 	int menu;
 
+	int permissionLevel = -1;
+
 	clear();
 	checkIfFirstRun();
 	
 	while(1)
 	{
 		clear();
+
+		printf("PERMISSION LEVEL IS CURRENTLY %d\n", permissionLevel);
+
 		//PUSHED FEATURES
 		printf("1. Make Quiz\n");
 		printf("2. Take Quiz\n");
@@ -34,7 +39,7 @@ int main()
 		//IN PROGRESS
 		printf("4. Add User\n");
 		printf("5. Retrieve Password Interface\n");
-		printf("6. Check User Privilages\n");
+		printf("6. Login\n");
 
 		//DEBUG
 		
@@ -70,10 +75,10 @@ int main()
 				addUser();
 				break;
 			case 5:
-				retrievePassword2();
+				retrievePasswordManual();
 				break;
 			case 6:
-				checkTeacher2();
+				permissionLevel = login();
 				break;
 
 			//DEBUG

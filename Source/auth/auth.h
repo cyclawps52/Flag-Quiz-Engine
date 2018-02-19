@@ -4,12 +4,13 @@
 int checkIfFirstRun();
 int firstRunTeacher();
 
+int login();
+
 int addUser();
 
 int retrievePassword();
-int retrievePassword2();
+int retrievePasswordManual();
 
 int checkTeacher();
-int checkTeacher2();
 
 #endif
