@@ -1,6 +1,6 @@
 #ifndef TAKEQUIZ_H
 #define TAKEQUIZ_H
 
-int takeQuiz();
+int takeQuiz(char studentID[]);
 
 #endif 

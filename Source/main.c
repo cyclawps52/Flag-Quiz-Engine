@@ -11,6 +11,7 @@
 
 //IN PROGRESS
 #include "auth/auth.h"
+#include "viewer/viewer.h"
 
 //DEBUG
 
@@ -31,21 +32,13 @@ int main()
 	{
 		clear();
 
-		if(strcmp(carryID, "NULL") == 0)
-		{
-			printf("No user logged in!\n");
-			line();
-		}
-		else
-		{
-			printf("Logged in as: %s\n", carryID);
-			line();
-		}
-
 		int menuChoice;
 
 		if(permissionLevel == -1)
 		{
+			printf("No user logged in!\n");
+			line();
+
 			printf("1. Login\n");
 			printf("0. Exit Program\n");
 			if(scanf("%d", &menuChoice) == 0)
@@ -72,8 +65,11 @@ int main()
 		}
 		else if(permissionLevel == 0)
 		{
+			printf("Logged in as: %s\n", carryID);
+			line();
+
 			printf("1. Take Quiz\n");
-			printf("2. Check Grade (not implemented yet)\n");
+			printf("2. Check Grade\n");
 			printf("0. Logout\n");
 			if(scanf("%d", &menuChoice) == 0)
 			{
@@ -87,10 +83,10 @@ int main()
 			switch(menuChoice)
 			{
 				case 1:
-					takeQuiz();
+					takeQuiz(carryID);
 					break;
 				case 2:
-					//checkGrade will go here
+					gradeViewer(carryID);
 					break;
 				case 0:
 					permissionLevel = -1;
@@ -107,6 +103,10 @@ int main()
 		}
 		else if(permissionLevel == 1)
 		{
+			printf("Logged in as: %s\n", carryID);
+			printf("Teacher mode enabled!\n");
+			line();
+
 			printf("1. Create Quiz\n");
 			printf("2. Grade Quiz\n");
 			printf("3. Create User\n");

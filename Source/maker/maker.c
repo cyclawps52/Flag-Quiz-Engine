@@ -16,7 +16,9 @@ int maker()
 	char quizName[140]="quizes/";
 	printf("What will you call your quiz (100 char max): ");
 	char temp[100];
-	scanf("%s", temp);
+	fflush(stdin);
+	fgets(temp, 100, stdin);
+	strtok(temp, "\n");
 	strcat(quizName, temp);
 
 	//add .quizfile extension to string

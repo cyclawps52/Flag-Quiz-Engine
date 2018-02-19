@@ -4,7 +4,7 @@
 int checkIfFirstRun();
 int firstRunTeacher();
 
-int login();
+int login(char carryID[]);
 
 int addUser();
 

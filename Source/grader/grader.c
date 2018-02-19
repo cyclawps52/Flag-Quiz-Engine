@@ -80,12 +80,12 @@ int grader()
         return 1;
     }
 
-    //create a grades/quizname/testDump.grade file to store the test
+    //create a quizDump/quizName.dump file to store the test
     FILE* dumpFP;
-    char dumpFile[300]="grades/";
+    make_directory("quizDump");
+    char dumpFile[300]="quizDump/";
     strcat(dumpFile, temp);
-    strcat(dumpFile, "/");
-    strcat(dumpFile, "testDump.grade");
+    strcat(dumpFile, ".dump");
     dumpFP = fopen(dumpFile, "w");
     if (dumpFP == NULL)
     {
@@ -194,7 +194,6 @@ int grader()
             if(strstr(quizbuffer, "Q: ") != NULL)
             {
                 char *truebuffer = quizbuffer +3;
-                fprintf(lone_results, "%s", truebuffer);
                 fprintf(dumpFP, "--------------------------------\n");
                 fprintf(dumpFP, "%s", truebuffer);
                 fgets(quizbuffer, 250, quiz);
@@ -210,7 +209,6 @@ int grader()
                 if(strstr(quizbuffer, "A. ") != NULL)
                 {
                     char *truebuffer = quizbuffer +3;
-                    fprintf(lone_results, "%s", truebuffer);
                     fprintf(dumpFP, "\t%s", truebuffer);
                     fgets(quizbuffer, 250, quiz);
                 }
@@ -331,6 +329,7 @@ int grader()
 
     line();
     printf("Overall results saved to %s!\n", gradeFile);
+    printf("Test Dump saved to %s and will be visible to students!\n", dumpFile);
     printf("Press ENTER to exit Grader.\n");
     fflush(stdin);
     getchar();

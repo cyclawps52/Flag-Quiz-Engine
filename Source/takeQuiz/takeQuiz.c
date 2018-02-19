@@ -7,7 +7,7 @@
 #include "../custom/custom.h"
 #include "takeQuiz.h"
 
-int takeQuiz()
+int takeQuiz(char studentID[])
 {
 	clear();
 
@@ -46,13 +46,8 @@ int takeQuiz()
 	strcat(resultsDir, "/");
 	make_directory(resultsDir);
 
-	//get student name
-	char studentID[100];
-	printf("Enter student ID (max 100 char): ");
-	fflush(stdin);
-	fgets(studentID, 100, stdin);
+	//fix passed in student name (in case a newline is still stuck in the buffer)
 	strtok(studentID, "\n");
-
 
 	//prefix results/quizname/ to studentID and append .quizresults
 	char resultsName[300];
