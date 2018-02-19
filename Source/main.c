@@ -12,7 +12,7 @@
 #include "viewer/viewer.h"
 
 //IN PROGRESS
-
+#include "delete/delete.h"
 
 //DEBUG
 
@@ -121,6 +121,7 @@ int main()
 			printf("5. Check Student Grade\n");
 			printf("6. Create User\n");
 			printf("7. Retrieve User Password\n");
+			printf("8. Open Delete Console\n");
 			
 			printf("0. Logout\n");
 			if(scanf("%d", &menuChoice) == 0)
@@ -155,6 +156,11 @@ int main()
 				case 7:
 					retrievePasswordManual();
 					break;
+
+				case 8:
+					teacherDelete();
+					break;
+
 				case 0:
 					permissionLevel = -1;
 					strcpy(carryID, "NULL\0");
