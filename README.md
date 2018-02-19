@@ -1,15 +1,18 @@
 # Flag Quiz Engine
 
-This project consists of three main parts: 
+This project consists of five main components: 
 
  1. The quiz maker
  2. The quiz taking engine
  3. The quiz grader
+ 4. The viewer engine
+ 5. The authentication engine
  
 The current timeline of planned features is as follows:
 
- 1. Student Grade Viewer - This would allow the students to see their grade file from the console in order to minimize the number of files to distribute.
- 2. Teacher Deletion Mechanic - This would allow the teacher to delete quizes, results, and grades from the console without having to go into the server itself.
+ 1. Teacher Deletion Mechanic - This would allow the teacher to delete quizes, results, and grades from the console without having to go into the server itself.
+ 2. Password changing mechanic for students
+ 3. Force-Password-Change mechanic for teachers (make student change password on next login)
 
 ## Quiz Maker
 
@@ -43,7 +46,18 @@ The individual grade file will display whether the student got the question righ
 
 The overall grade file will display all user IDs with their scores displayed as straight numbers as well as percentages. At the end of the file, a table will be outputted with statistics per question. This table includes how many students got the question right, wrong, and the percentage correct for each question. The file will also include the total quiz average across all students.
 
-The grader also outputs a testDump.grade file with the questions and answers from the quiz into the grades/quizname/ directory. This can be used if the teacher wants to read the quiz in an easier format.
+The grader also outputs a testDump.grade file with the questions and answers from the quiz into the testDump/ directory. This can be used if the teacher wants to read the quiz in an easier format.
 
 [The source code for the quiz grader can be found here.](https://github.com/cyclawps52/Flag-Quiz-Engine/blob/master/Source/grader/grader.c)
 
+## Viewer Engine
+The viewer engine allows students and teachers to view grade files and test dumps. This is used to elimate the need for distributing the grade files.
+
+[The source code for the viewer engine can be found here.](https://github.com/cyclawps52/Flag-Quiz-Engine/blob/master/Source/viewer/viewer.c)
+
+## Authentication Engine
+The authentication engine controls the privilege levels across the entire program. When the program is launches for the first time, it prompts for the creation of a teacher user (permission level 1). Teachers can create more users for students (permission level 0) or additional teachers.
+
+Teachers can also retrieve student passwords in the event that the student cannot remember their password.
+
+[The source code for the authentication engine can be found here.](https://github.com/cyclawps52/Flag-Quiz-Engine/blob/master/Source/auth/auth.c)
