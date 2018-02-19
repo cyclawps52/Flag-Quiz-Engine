@@ -8,9 +8,8 @@ This project consists of three main parts:
  
 The current timeline of planned features is as follows:
 
- 1. True User Login Support - This would have logins for students and teachers so they could only access the tools necessary for their role. This leads into the Student Grade Viewer. The end goal is to have better protection on usernames.
- 2. Student Grade Viewer - This would allow the students to see their grade file from the console in order to minimize the number of files to distribute.
- 3. Teacher Deletion Mechanic - This would allow the teacher to delete quizes, results, and grades from the console without having to go into the server itself.
+ 1. Student Grade Viewer - This would allow the students to see their grade file from the console in order to minimize the number of files to distribute.
+ 2. Teacher Deletion Mechanic - This would allow the teacher to delete quizes, results, and grades from the console without having to go into the server itself.
 
 ## Quiz Maker
 

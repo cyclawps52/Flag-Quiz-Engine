@@ -355,7 +355,7 @@ int addUser()
 
     //promote teacher if chosen
     int promoteUser;
-    printf("Will this user be for a teacher?\n");
+    printf("\nWill this user be for a teacher?\n");
     printf("1. Yes\n");
     printf("2. No\n");
     printf("Choice: ");
@@ -461,6 +461,8 @@ int retrievePasswordManual()
 	char passwordBox[32];
 	fread(passwordBox, sizeof(char), 32, userFile);
 
+	printf("The password for %s is: %s\n", userID, passwordBox);
+	pete();
 	fclose(userFile);
 	return 0;
 }
