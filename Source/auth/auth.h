@@ -13,4 +13,6 @@ int retrievePasswordManual();
 
 int checkTeacher();
 
+int promoteUser();
+
 #endif

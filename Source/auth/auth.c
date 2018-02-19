@@ -504,3 +504,56 @@ int checkTeacher(char toCheck[])
 
 	return 1;
 }
+
+//promotes student account to teacher
+int promoteUser()
+{
+	clear();
+
+	//get userID to promote
+	char userID[100];
+	printf("What user account do you wish to promote (max 100 char): ");
+	fflush(stdin);
+	fgets(userID, 100, stdin);
+	strtok(userID, "\n");
+
+	//check if user file exists
+	FILE* accountCheck;
+	char accountCheckPath[150] = "users/";
+	strcat(accountCheckPath, userID);
+	strcat(accountCheckPath, ".user");
+	accountCheck = fopen(accountCheckPath, "rb");
+	if(accountCheck == NULL)
+	{
+		printf("User %s does not exist in the system!\n", userID);
+		pete();
+		return 1;
+	}
+
+	//create teacher directory
+	make_directory("teachers");
+
+	//get teacher string
+	char teacherPath[110] = "teachers/";
+	strcat(teacherPath, userID);
+	strcat(teacherPath, ".teacher");
+
+	//writing teacher file
+	FILE* teacherFile;
+	teacherFile = fopen(teacherPath, "wb");
+	if(teacherFile == NULL)
+	{
+		printf("There was an error creating %s.\n", teacherPath);
+		pete();
+		return 1;
+	}
+	fwrite("abc123", sizeof(char), 6, teacherFile);
+	fclose(teacherFile);
+
+	printf("User %s successfully promoted to teacher!\n", userID);
+	pete();
+
+	fclose(teacherFile);
+	fclose(accountCheck);
+	return 0;
+}

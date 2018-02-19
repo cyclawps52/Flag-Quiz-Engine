@@ -34,7 +34,6 @@ int teacherDelete()
 
 	switch(menuChoice)
 	{
-		
 
 		default:
 			printf("Invalid option!\n");

@@ -121,9 +121,11 @@ int main()
 			printf("5. Check Student Grade\n");
 			printf("6. Create User\n");
 			printf("7. Retrieve User Password\n");
-			printf("8. Open Delete Console\n");
-			
+			printf("8. Promote User to Teacher\n");
+			printf("9. Open Delete Console\n");
+
 			printf("0. Logout\n");
+			
 			if(scanf("%d", &menuChoice) == 0)
 			{
 				printf("Invalid option!\n");
@@ -156,8 +158,10 @@ int main()
 				case 7:
 					retrievePasswordManual();
 					break;
-
 				case 8:
+					promoteUser();
+					break;
+				case 9:
 					teacherDelete();
 					break;
 
