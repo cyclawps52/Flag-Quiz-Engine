@@ -8,11 +8,6 @@ This project consists of six main components:
  4. The viewer engine
  5. The authentication engine
  6. The deletion engine
- 
-The current timeline of planned features is as follows:
-
- 1. Password changing mechanic for students
- 2. Force-Password-Change mechanic for teachers (make student change password on next login)
 
 ## Quiz Maker
 
@@ -60,6 +55,10 @@ The authentication engine controls the privilege levels across the entire progra
 
 Teachers can also retrieve student passwords in the event that the student cannot remember their password.
 
+Teachers can also reset a student's password directly from their teacher view.
+
+Students can also reset their own passwords from the student view.
+
 [The source code for the authentication engine can be found here.](https://github.com/cyclawps52/Flag-Quiz-Engine/blob/master/Source/auth/auth.c)
 
 ## Deletion Engine
@@ -69,4 +68,4 @@ The deletion menu also allows a teacher to factory reset the program to an Out o
 
 One function used inside the deletion engine is not my own work (the remove_directory function). This is commented as such inside the source code.
 
-[The source code for the deletion engine can be found here.](https://github.com/cyclawps52/Flag-Quiz-Engine/blob/master/Source/auth/auth.c)
+[The source code for the deletion engine can be found here.](https://github.com/cyclawps52/Flag-Quiz-Engine/blob/master/Source/delete/delete.c)
