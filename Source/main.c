@@ -10,12 +10,7 @@
 #include "takeQuiz/takeQuiz.h"
 #include "auth/auth.h"
 #include "viewer/viewer.h"
-
-//IN PROGRESS
 #include "delete/delete.h"
-
-//DEBUG
-
 
 //MAIN
 int main()
@@ -131,10 +126,11 @@ int main()
 
 			printf("6. Create User\n");
 			printf("7. Retrieve User Password\n");
-			printf("8. Promote User to Teacher\n");
+			printf("8. Change User Password\n");
+			printf("9. Promote User to Teacher\n");
 			printf("\n");
 
-			printf("9. Open Delete Console\n");
+			printf("10. Open Delete Console\n");
 			printf("0. Logout\n");
 			
 			printf("\n\tChoice: ");
@@ -171,9 +167,12 @@ int main()
 					retrievePasswordManual();
 					break;
 				case 8:
-					promoteUser();
+					permissionLevel = changeUserPassword(carryID);
 					break;
 				case 9:
+					promoteUser();
+					break;
+				case 10:
 					permissionLevel = teacherDelete(carryID);
 					break;
 

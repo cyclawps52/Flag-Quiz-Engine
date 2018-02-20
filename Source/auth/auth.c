@@ -675,3 +675,110 @@ int removeUser(char carryID[])
 
 	return 0;
 }
+
+int changeUserPassword(char carryID[])
+{
+	clear();
+
+	//get user to change credentials
+	printf("Which user's password would you like to change: ");
+	char userToChange[100];
+	fflush(stdin);
+	fgets(userToChange, 100, stdin);
+	strtok(userToChange, "\n");
+
+	//check if user exists
+	char userToChangePath[150] = "users/";
+	strcat(userToChangePath, userToChange);
+	strcat(userToChangePath, ".user");
+	FILE* userCheck;
+	userCheck = fopen(userToChangePath, "rb");
+	if(userCheck == NULL)
+	{
+		printf("User %s does not exist in the system!\n", userToChange);
+		pete();
+		return 1;
+	}
+	fclose(userCheck);
+
+	//get new user password
+	char indChar;
+    char password[32];
+    int passLen=0, i, boCheck=0;
+    clear();
+    printf("Changing password for user: %s\n", userToChange);
+    printf("Please enter a password (max 32 char): ");
+    while (1) 
+    {
+        indChar = getch();
+        if (indChar == 0)
+        {
+            return 1;
+        }
+        
+        if (indChar != '\r' && indChar != '\n' && indChar != '\b')
+        {
+        	password[passLen] = indChar;
+        	passLen++;
+        	boCheck++;
+        }
+
+        if(indChar == '\b')
+        {
+        	if(passLen>0)
+        	{
+        		passLen--;
+        	}
+        	if(boCheck>0)
+        	{
+        		boCheck--;
+        	}
+        }
+
+        clear();
+        printf("Changing password for user: %s\n", userToChange);
+    	printf("Please enter a password (max 32 char): ");
+        for (i = 0; i < passLen; i++)
+        {
+            printf("*");
+        }
+        if (indChar == '\n' || indChar == '\r')
+        {
+            break;
+        }
+        if(boCheck>=32)
+        {
+        	printf("\nOverflow detected, cutting password here!\n");
+        	break;
+        }
+
+    }
+    password[passLen] = '\0';
+
+    //write password to file
+    // fwrite(password, sizeof(char), 50, newUser);
+    userCheck = fopen(userToChangePath, "wb");
+	if(userCheck == NULL)
+	{
+		printf("\nNew user file could not be created.\n");
+		printf("The password for %s will not change!\n", userToChange);
+		pete();
+		return 1;
+	}
+	fwrite(password, sizeof(char), 50, userCheck);
+	fclose(userCheck);
+
+	//check if changing own password
+	if(strcmp(userToChange, carryID) == 0)
+	{
+		printf("\nYou changed your own password, logging out for security purposes!\n");
+		pete();
+		return -1;
+	}
+
+	printf("\nPassword for %s has been changed!\n", userToChange);
+	pete();
+
+	fclose(userCheck);
+	return 1;
+}
