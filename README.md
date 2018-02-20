@@ -1,5 +1,7 @@
 # Flag Quiz Engine
 
+[A prebuilt binary for Windows can be found here.](https://github.com/cyclawps52/Flag-Quiz-Engine/blob/master/FQE.exe)
+
 This project consists of six main components: 
 
  1. The quiz maker
