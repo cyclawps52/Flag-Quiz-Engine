@@ -756,7 +756,6 @@ int changeUserPassword(char carryID[])
     password[passLen] = '\0';
 
     //write password to file
-    // fwrite(password, sizeof(char), 50, newUser);
     userCheck = fopen(userToChangePath, "wb");
 	if(userCheck == NULL)
 	{
@@ -781,4 +780,85 @@ int changeUserPassword(char carryID[])
 
 	fclose(userCheck);
 	return 1;
+}
+
+int changeStudentPassword(char carryID[])
+{
+	clear();
+
+	//create path for user file
+	char userToChangePath[150] = "users/";
+	strcat(userToChangePath, carryID);
+	strcat(userToChangePath, ".user");
+
+	//get new user password
+	char indChar;
+    char password[32];
+    int passLen=0, i, boCheck=0;
+    clear();
+    printf("Changing password for user: %s\n", carryID);
+    printf("Please enter a password (max 32 char): ");
+    while (1) 
+    {
+        indChar = getch();
+        if (indChar == 0)
+        {
+            return 1;
+        }
+        
+        if (indChar != '\r' && indChar != '\n' && indChar != '\b')
+        {
+        	password[passLen] = indChar;
+        	passLen++;
+        	boCheck++;
+        }
+
+        if(indChar == '\b')
+        {
+        	if(passLen>0)
+        	{
+        		passLen--;
+        	}
+        	if(boCheck>0)
+        	{
+        		boCheck--;
+        	}
+        }
+
+        clear();
+        printf("Changing password for user: %s\n", carryID);
+    	printf("Please enter a password (max 32 char): ");
+        for (i = 0; i < passLen; i++)
+        {
+            printf("*");
+        }
+        if (indChar == '\n' || indChar == '\r')
+        {
+            break;
+        }
+        if(boCheck>=32)
+        {
+        	printf("\nOverflow detected, cutting password here!\n");
+        	break;
+        }
+
+    }
+    password[passLen] = '\0';
+
+    //write password to file
+    FILE* userCheck;
+    userCheck = fopen(userToChangePath, "wb");
+	if(userCheck == NULL)
+	{
+		printf("\nNew user file could not be created.\n");
+		printf("The password for %s will not change!\n", carryID);
+		pete();
+		return 1;
+	}
+	fwrite(password, sizeof(char), 50, userCheck);
+	fclose(userCheck);
+
+	printf("\nYou changed your own password, logging out for security purposes!\n");
+	pete();
+	return -1;
 }

@@ -74,6 +74,9 @@ int main()
 			printf("1. Take Quiz\n");
 			printf("2. Check Grade\n");
 			printf("3. View Quiz Dump\n");
+			printf("\n");
+
+			printf("4. Change Password\n");
 			printf("0. Logout\n");
 			printf("\n\tChoice: ");
 			if(scanf("%d", &menuChoice) == 0)
@@ -95,6 +98,9 @@ int main()
 					break;
 				case 3:
 					dumpViewer(carryID);
+					break;
+				case 4:
+					permissionLevel = changeStudentPassword(carryID);
 					break;
 				case 0:
 					permissionLevel = -1;

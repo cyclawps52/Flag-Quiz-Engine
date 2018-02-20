@@ -19,5 +19,6 @@ int demoteUser(char carryID[]);
 int removeUser(char carryID[]);
 
 int changeUserPassword(char carryID[]);
+int changeStudentPassword(char carryID[]);
 
 #endif
