@@ -1,18 +1,18 @@
 # Flag Quiz Engine
 
-This project consists of five main components: 
+This project consists of six main components: 
 
  1. The quiz maker
  2. The quiz taking engine
  3. The quiz grader
  4. The viewer engine
  5. The authentication engine
+ 6. The deletion engine
  
 The current timeline of planned features is as follows:
 
- 1. Teacher Deletion Mechanic - This would allow the teacher to delete quizes, results, and grades from the console without having to go into the server itself.
- 2. Password changing mechanic for students
- 3. Force-Password-Change mechanic for teachers (make student change password on next login)
+ 1. Password changing mechanic for students
+ 2. Force-Password-Change mechanic for teachers (make student change password on next login)
 
 ## Quiz Maker
 
@@ -61,3 +61,12 @@ The authentication engine controls the privilege levels across the entire progra
 Teachers can also retrieve student passwords in the event that the student cannot remember their password.
 
 [The source code for the authentication engine can be found here.](https://github.com/cyclawps52/Flag-Quiz-Engine/blob/master/Source/auth/auth.c)
+
+## Deletion Engine
+The deletion engine allows teachers to dynamically delete quizes, results, grades, and test dumps without leaving the program inside the console.
+
+The deletion menu also allows a teacher to factory reset the program to an Out of Box Experience (OOBE). This removes the quizes, grades, results, users, teachers, and testDump directories to only leave the executable.
+
+One function used inside the deletion engine is not my own work (the remove_directory function). This is commented as such inside the source code.
+
+[The source code for the deletion engine can be found here.](https://github.com/cyclawps52/Flag-Quiz-Engine/blob/master/Source/auth/auth.c)

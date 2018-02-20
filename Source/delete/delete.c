@@ -413,7 +413,6 @@ int factoryReset()
 	remove_directory("quizes/");
 	remove_directory("grades/");
 	remove_directory("quizDump/");
-	remove_directory("quizes/");
 	remove_directory("results/");
 	remove_directory("teachers/");
 	remove_directory("users/");
