@@ -538,8 +538,18 @@ int promoteUser()
 	strcat(teacherPath, userID);
 	strcat(teacherPath, ".teacher");
 
-	//writing teacher file
+	//check if user is already a teacher
 	FILE* teacherFile;
+	teacherFile = fopen(teacherPath, "rb");
+	if(teacherFile != NULL)
+	{
+		printf("User %s is already a teacher!\n", userID);
+		fclose(teacherFile);
+		pete();
+		return 1;
+	}
+
+	//writing teacher file
 	teacherFile = fopen(teacherPath, "wb");
 	if(teacherFile == NULL)
 	{
@@ -555,5 +565,113 @@ int promoteUser()
 
 	fclose(teacherFile);
 	fclose(accountCheck);
+	return 0;
+}
+
+//demotes teacher account to user account
+int demoteUser(char carryID[])
+{
+	clear();
+
+	printf("Which user do you wish to demote: ");
+	char userID[100];
+	fflush(stdin);
+	fgets(userID, 100, stdin);
+	strtok(userID, "\n");
+
+	//check if user inputted is the current logged in user
+	if(strcmp(userID, carryID) == 0)
+	{
+		printf("Cannot demote currently logged in user.\n");
+		printf("If you wish to delete all teacher accounts, please factory reset.\n");
+		return 1;
+	}
+
+	//check if user exists
+	FILE* userCheck;
+	char userCheckPath[150] = "users/";
+	strcat(userCheckPath, userID);
+	strcat(userCheckPath, ".user");
+	userCheck = fopen(userCheckPath, "rb");
+	if(userCheck == NULL)
+	{
+		printf("User %s does not exist in the system!\n");
+		return 1;
+	}
+	fclose(userCheck);
+
+	//create string for teacher file deletion
+	char teacherDeletePath[150] = "teachers/";
+	strcat(teacherDeletePath, userID);
+	strcat(teacherDeletePath, ".teacher");
+	if (remove(teacherDeletePath) == 0)
+	{
+      printf("User %s has been successfully demoted.\n");
+      return 0;
+	}
+   else
+   {
+      printf("User %s is already a student!\n");
+      return 0;
+   }
+
+   return 0;
+}
+
+//removes user account and teacher account
+int removeUser(char carryID[])
+{
+	clear();
+
+	printf("Which user do you wish to delete: ");
+	char userID[100];
+	fflush(stdin);
+	fgets(userID, 100, stdin);
+	strtok(userID, "\n");
+
+	//check if user inputted is the current logged in user
+	if(strcmp(userID, carryID) == 0)
+	{
+		printf("Cannot delete currently logged in user.\n");
+		printf("If you wish to delete all accounts, please factory reset.\n");
+		return 1;
+	}
+
+	//check if user exists
+	FILE* userCheck;
+	char userCheckPath[150] = "users/";
+	strcat(userCheckPath, userID);
+	strcat(userCheckPath, ".user");
+	userCheck = fopen(userCheckPath, "rb");
+	if(userCheck == NULL)
+	{
+		printf("User %s does not exist in the system!\n");
+		return 1;
+	}
+	fclose(userCheck);
+
+	//create string for teacher file deletion (if it exists)
+	char userDeletePath[150] = "teachers/";
+	strcat(userDeletePath, userID);
+	strcat(userDeletePath, ".teacher");
+	if (remove(userDeletePath) == 0)
+	{
+      printf("User %s's teacher file has been removed.\n");
+	}
+    
+    //create string for user file deletion
+    strcpy(userDeletePath, "users/");
+    strcat(userDeletePath, userID);
+    strcat(userDeletePath, ".user");
+    if (remove(userDeletePath) == 0)
+	{
+    	printf("User %s has been removed.\n", userID);
+	}
+	else
+	{
+		printf("User %s could not be deleted.\n", userID);
+		return 1;
+	}
+
 	return 0;
 }

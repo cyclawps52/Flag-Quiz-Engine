@@ -34,14 +34,19 @@ int main()
 		clear();
 
 		int menuChoice;
-
-		if(permissionLevel == -1)
+		if(permissionLevel == -2)
+		{
+			clear();
+			checkIfFirstRun();
+		}
+		else if(permissionLevel == -1)
 		{
 			printf("No user logged in!\n");
 			line();
 
 			printf("1. Login\n");
 			printf("0. Exit Program\n");
+			printf("\n\tChoice: ");
 			if(scanf("%d", &menuChoice) == 0)
 			{
 				printf("Invalid option!\n");
@@ -75,6 +80,7 @@ int main()
 			printf("2. Check Grade\n");
 			printf("3. View Quiz Dump\n");
 			printf("0. Logout\n");
+			printf("\n\tChoice: ");
 			if(scanf("%d", &menuChoice) == 0)
 			{
 				printf("Invalid option!\n");
@@ -115,17 +121,23 @@ int main()
 			line();
 
 			printf("1. Create Quiz\n");
-			printf("2. Grade Quiz\n");
+			printf("\n");
+
+			printf("2. Grade & Dump Quiz\n");
 			printf("3. View Quiz Dump\n");
 			printf("4. View Overall Quiz Grade\n");
 			printf("5. Check Student Grade\n");
+			printf("\n");
+
 			printf("6. Create User\n");
 			printf("7. Retrieve User Password\n");
 			printf("8. Promote User to Teacher\n");
-			printf("9. Open Delete Console\n");
+			printf("\n");
 
+			printf("9. Open Delete Console\n");
 			printf("0. Logout\n");
 			
+			printf("\n\tChoice: ");
 			if(scanf("%d", &menuChoice) == 0)
 			{
 				printf("Invalid option!\n");
@@ -162,7 +174,7 @@ int main()
 					promoteUser();
 					break;
 				case 9:
-					teacherDelete();
+					permissionLevel = teacherDelete(carryID);
 					break;
 
 				case 0:

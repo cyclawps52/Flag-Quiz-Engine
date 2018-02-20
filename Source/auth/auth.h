@@ -14,5 +14,8 @@ int retrievePasswordManual();
 int checkTeacher();
 
 int promoteUser();
+int demoteUser(char carryID[]);
+
+int removeUser(char carryID[]);
 
 #endif
