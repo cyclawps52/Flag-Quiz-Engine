@@ -12,6 +12,7 @@ int teacherDelete(char carryID[])
 {
 	clear();
 	
+	int newPerm;
 	char toDeletePath[350];
 
 	//display deletion menu
@@ -64,9 +65,9 @@ int teacherDelete(char carryID[])
 			hardDelete();
 			break;
 		case 8: /* Factory Reset (first time run/OOBE) */
-			factoryReset();
+			newPerm = factoryReset();
 			pete();
-			return -2;
+			return newPerm;
 		case 0:
 			return 1;
 		default:
@@ -420,5 +421,5 @@ int factoryReset()
 	clear();
 	printf("Factory reset complete.\n");
 
-	return 0;
+	return -2;
 }
