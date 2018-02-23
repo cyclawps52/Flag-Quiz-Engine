@@ -1,7 +1,5 @@
 # Flag Quiz Engine
 
-_2,729 lines of beautiful code across 16 files to make an amazing application_
-
 [A prebuilt binary for Windows can be found here.](https://github.com/cyclawps52/Flag-Quiz-Engine/blob/master/Source/FQE.exe)
 
 This project consists of six main components: 
