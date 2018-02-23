@@ -25,9 +25,19 @@ int grader()
     char quizName[140]="quizes/";
     char temp[100];
     printf("What quiz do you want to grade(100 char max): ");
-    scanf("%s", temp);
+    //scanf("%s", temp);
+    fflush(stdin);
+    fgets(temp, 100, stdin);
     line();
     strcat(quizName, temp);
+
+    //check if choice is empty
+    if(strcmp(temp, "\n") == 0)
+    {
+        printf("Quiz name cannot be empty!\n");
+        pete();
+        return 1;
+    }
 
     //add .quizfile extension to string
     strcat(quizName, ".quizfile");

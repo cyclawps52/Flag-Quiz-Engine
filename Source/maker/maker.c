@@ -21,6 +21,14 @@ int maker()
 	strtok(temp, "\n");
 	strcat(quizName, temp);
 
+	//check if quizID is blank
+	if(strcmp(temp, "\n") == 0)
+	{
+		printf("Quiz name cannot be blank!\n");
+		pete();
+		return 1;
+	}
+
 	//add .quizfile extension to string
 	strcat(quizName, ".quizfile");
 

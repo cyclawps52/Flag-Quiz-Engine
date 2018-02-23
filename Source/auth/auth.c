@@ -10,6 +10,7 @@ int checkIfFirstRun()
 {
 	FILE* defTeacher;
 	defTeacher = fopen("teachers/default.teacher", "rb");
+	int returnPerm;
 	if(defTeacher == NULL)
 	{
 		//Give info
@@ -19,11 +20,12 @@ int checkIfFirstRun()
 		getchar();
 
 		//Create first teacher user
-		firstRunTeacher();
+		returnPerm = firstRunTeacher();
+		fclose(defTeacher);
+		return returnPerm;
 	}
 
-	fclose(defTeacher);
-	return 0;
+	return -1;
 }
 
 int firstRunTeacher()
@@ -40,6 +42,14 @@ int firstRunTeacher()
 	char userIDLen = strlen(userID);
 	userID[userIDLen-1] = '\0';
 
+	//check if userID is blank
+	if(strcmp(userID, "") == 0)
+	{
+		printf("User ID cannot be blank!\n");
+		pete();
+		return -2;
+	}
+
 	//attempt to make user directory
 	make_directory("users");
 
@@ -55,7 +65,7 @@ int firstRunTeacher()
 		printf("User already exists!\n");
 		pete();
 		fclose(newUser);
-		return 1;
+		return -2;
 	}
 
 	//create user file
@@ -73,7 +83,7 @@ int firstRunTeacher()
         indChar = getch();
         if (indChar == 0)
         {
-            return 1;
+            return -2;
         }
         
         if (indChar != '\r' && indChar != '\n' && indChar != '\b')
@@ -133,7 +143,7 @@ int firstRunTeacher()
 	{
 		printf("There was an error creating %s.\n", teacherPath);
 		pete();
-		return 1;
+		return -2;
 	}
 	fwrite("abc123", sizeof(char), 6, teacherFile);
 	fclose(teacherFile);  
@@ -144,13 +154,13 @@ int firstRunTeacher()
 	{
 		printf("There was an error creating the default teacher file.\n");
 		pete();
-		return 1;
+		return -2;
 	}
 	fwrite("abc123", sizeof(char), 6, teacherFile);
 	fclose(teacherFile); 
 
 	fclose(newUser);
-	return 0;
+	return -1;
 }
 
 //returns permission value of login
@@ -166,6 +176,14 @@ int login(char carryID[])
 	char userIDLen = strlen(userID);
 	userID[userIDLen-1] = '\0';
 	strcpy(carryID, userID);
+
+	//check if choice is empty
+	if(strcmp(userID, "") == 0)
+	{
+		printf("Username cannot be empty!\n");
+		pete();
+		return -1;
+	}
 
 	//check if userID exists
 	char userIDPath[150] = "users/";
@@ -275,6 +293,14 @@ int addUser()
 	fgets(userID, 100, stdin);
 	char userIDLen = strlen(userID);
 	userID[userIDLen-1] = '\0';
+
+	//check if userID is blank
+	if(strcmp(userID, "") == 0)
+	{
+		printf("User ID cannot be blank!\n");
+		pete();
+		return 1;
+	}
 
 	//attempt to make user directory
 	make_directory("users");
@@ -441,6 +467,14 @@ int retrievePasswordManual()
 	char userIDLen = strlen(userID);
 	userID[userIDLen-1] = '\0';
 
+	//check if choice is empty
+	if(strcmp(userID, "") == 0)
+	{
+		printf("User ID cannot be empty!\n");
+		pete();
+		return 1;
+	}
+
 	//attempt to make user directory
 	make_directory("users");
 
@@ -517,6 +551,14 @@ int promoteUser()
 	fgets(userID, 100, stdin);
 	strtok(userID, "\n");
 
+	//check if choice is empty
+	if(strcmp(userID, "\n") == 0)
+	{
+		printf("User ID cannot be empty!\n");
+		pete();
+		return 1;
+	}
+
 	//check if user file exists
 	FILE* accountCheck;
 	char accountCheckPath[150] = "users/";
@@ -579,6 +621,13 @@ int demoteUser(char carryID[])
 	fgets(userID, 100, stdin);
 	strtok(userID, "\n");
 
+	//check if choice is empty
+	if(strcmp(userID, "\n") == 0)
+	{
+		printf("User ID cannot be empty!\n");
+		return 1;
+	}
+
 	//check if user inputted is the current logged in user
 	if(strcmp(userID, carryID) == 0)
 	{
@@ -595,7 +644,7 @@ int demoteUser(char carryID[])
 	userCheck = fopen(userCheckPath, "rb");
 	if(userCheck == NULL)
 	{
-		printf("User %s does not exist in the system!\n");
+		printf("User %s does not exist in the system!\n", userID);
 		return 1;
 	}
 	fclose(userCheck);
@@ -629,6 +678,13 @@ int removeUser(char carryID[])
 	fgets(userID, 100, stdin);
 	strtok(userID, "\n");
 
+	//check if choice is empty
+	if(strcmp(userID, "\n") == 0)
+	{
+		printf("User ID cannot be empty!\n");
+		return 1;
+	}
+
 	//check if user inputted is the current logged in user
 	if(strcmp(userID, carryID) == 0)
 	{
@@ -645,7 +701,7 @@ int removeUser(char carryID[])
 	userCheck = fopen(userCheckPath, "rb");
 	if(userCheck == NULL)
 	{
-		printf("User %s does not exist in the system!\n");
+		printf("User %s does not exist in the system!\n", userID);
 		return 1;
 	}
 	fclose(userCheck);
@@ -686,6 +742,14 @@ int changeUserPassword(char carryID[])
 	fflush(stdin);
 	fgets(userToChange, 100, stdin);
 	strtok(userToChange, "\n");
+
+	//check if choice is empty
+	if(strcmp(userToChange, "\n") == 0)
+	{
+		printf("User ID cannot be empty!\n");
+		pete();
+		return 1;
+	}
 
 	//check if user exists
 	char userToChangePath[150] = "users/";

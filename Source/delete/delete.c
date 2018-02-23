@@ -157,6 +157,13 @@ int removeDump()
 	fgets(dumpToDelete, 100, stdin);
 	strtok(dumpToDelete, "\n");
 
+	//check if choice is empty
+	if(strcmp(dumpToDelete, "\n") == 0)
+	{
+		printf("Selection cannot be empty!\n");
+		return 1;
+	}
+
 	//check if quiz exists
 	FILE* quizCheck;
 	char quizCheckPath[150] = "quizes/";
@@ -212,6 +219,13 @@ int removeResults()
 	fgets(resultsToDelete, 100, stdin);
 	strtok(resultsToDelete, "\n");
 
+	//check if choice is empty
+	if(strcmp(resultsToDelete, "\n") == 0)
+	{
+		printf("Selection cannot be empty!\n");
+		return 1;
+	}
+
 	//check if quiz exists
 	FILE* quizCheck;
 	char quizCheckPath[150] = "quizes/";
@@ -248,6 +262,13 @@ int removeGrades()
 	fgets(gradesToDelete, 100, stdin);
 	strtok(gradesToDelete, "\n");
 
+	//check if choice is empty
+	if(strcmp(gradesToDelete, "\n") == 0)
+	{
+		printf("Selection cannot be empty!\n");
+		return 1;
+	}
+
 	//check if quiz exists
 	FILE* quizCheck;
 	char quizCheckPath[150] = "quizes/";
@@ -283,6 +304,13 @@ int softDelete()
 	char quizToDelete[100];
 	fgets(quizToDelete, 100, stdin);
 	strtok(quizToDelete, "\n");
+
+	//check if choice is empty
+	if(strcmp(quizToDelete, "\n") == 0)
+	{
+		printf("Selection cannot be empty!\n");
+		return 1;
+	}
 
 	//check if quiz exists
 	FILE* quizCheck;
@@ -322,6 +350,13 @@ int hardDelete()
 	char quizToDelete[100];
 	fgets(quizToDelete, 100, stdin);
 	strtok(quizToDelete, "\n");
+
+	//check if choice is empty
+	if(strcmp(quizToDelete, "\n") == 0)
+	{
+		printf("Selection cannot be empty!\n");
+		return 1;
+	}
 
 	//check if quiz exists
 	FILE* quizCheck;
@@ -415,11 +450,23 @@ int factoryReset()
 	remove_directory("grades/");
 	remove_directory("quizDump/");
 	remove_directory("results/");
+
+	//remove default teacher file
+	if(remove("teachers/default.teacher") != 0)
+	{
+		printf("Default teacher file could not be deleted.\n");
+		printf("Please delete teachers/ directory manually.\n");
+		printf("If this directory is not deleted, the automatic teacher creator will not appear.\n");
+		pete();
+	}
+
 	remove_directory("teachers/");
 	remove_directory("users/");
 
 	clear();
 	printf("Factory reset complete.\n");
+	printf("Occasionally, certain files will deny automatic deletion. This is out of the quiz engine's control.\n");
+	printf("If there are any files inside the install directory besides FQE, please delete them.\n");
 
 	return -2;
 }

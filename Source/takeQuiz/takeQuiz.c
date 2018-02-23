@@ -23,6 +23,14 @@ int takeQuiz(char studentID[])
 	fgets(temp, 100, stdin);
 	strtok(temp, "\n");
 	strcat(quizName, temp);
+
+	//check if choice is empty
+	if(strcmp(temp, "\n") == 0)
+	{
+		printf("Quiz name cannot be empty!\n");
+		pete();
+		return 1;
+	}
 	
 
 	//add .quizfile extension to string

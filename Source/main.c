@@ -22,7 +22,7 @@ int main()
 	int permissionLevel = -1;
 
 	clear();
-	checkIfFirstRun();
+	permissionLevel = checkIfFirstRun();
 	
 	while(1)
 	{
@@ -32,7 +32,7 @@ int main()
 		if(permissionLevel == -2)
 		{
 			clear();
-			checkIfFirstRun();
+			permissionLevel = checkIfFirstRun();
 		}
 		else if(permissionLevel == -1)
 		{

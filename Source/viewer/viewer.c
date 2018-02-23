@@ -20,6 +20,14 @@ int gradeViewer(char carryID[])
 	fgets(testID, 100, stdin);
 	strtok(testID, "\n");
 
+	//check if choice is empty
+	if(strcmp(testID, "\n") == 0)
+	{
+		printf("Quiz name cannot be empty!\n");
+		pete();
+		return 1;
+	}
+
 	//check if quiz is valid
 	char testFilePath[150] = "quizes/";
 	strcat(testFilePath, testID);
@@ -97,6 +105,14 @@ int gradeViewerTeacher()
 	fgets(carryID, 100, stdin);
 	strtok(carryID, "\n");
 
+	//check if choice is empty
+	if(strcmp(carryID, "\n") == 0)
+	{
+		printf("Student ID cannot be empty!\n");
+		pete();
+		return 1;
+	}
+
 	//check if valid student
 	char studentIDPath[150] = "users/";
 	strcat(studentIDPath, carryID);
@@ -115,6 +131,14 @@ int gradeViewerTeacher()
 	char testID[100];
 	fgets(testID, 100, stdin);
 	strtok(testID, "\n");
+
+	//check if choice is empty
+	if(strcmp(testID, "\n") == 0)
+	{
+		printf("Quiz name cannot be empty!\n");
+		pete();
+		return 1;
+	}
 
 	//check if quiz is valid
 	char testFilePath[150] = "quizes/";
@@ -191,6 +215,14 @@ int dumpViewer(char carryID[])
 	fgets(testID, 100, stdin);
 	strtok(testID, "\n");
 
+	//check if choice is empty
+	if(strcmp(testID, "\n") == 0)
+	{
+		printf("Quiz name cannot be empty!\n");
+		pete();
+		return 1;
+	}
+
 	//check if quiz is valid
 	char testFilePath[150] = "quizes/";
 	strcat(testFilePath, testID);
@@ -261,6 +293,14 @@ int dumpViewerTeacher()
 	fgets(testID, 100, stdin);
 	strtok(testID, "\n");
 
+	//check if choice is empty
+	if(strcmp(testID, "\n") == 0)
+	{
+		printf("Quiz name cannot be empty!\n");
+		pete();
+		return 1;
+	}
+
 	//check if quiz is valid
 	char testFilePath[150] = "quizes/";
 	strcat(testFilePath, testID);
@@ -315,6 +355,14 @@ int overallViewerTeacher()
 	char testID[100];
 	fgets(testID, 100, stdin);
 	strtok(testID, "\n");
+
+	//check if choice is empty
+	if(strcmp(testID, "\n") == 0)
+	{
+		printf("Quiz name cannot be empty!\n");
+		pete();
+		return 1;
+	}
 
 	//check if quiz is valid
 	char testFilePath[150] = "quizes/";
