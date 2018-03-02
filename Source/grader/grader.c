@@ -40,6 +40,7 @@ int grader()
     }
 
     //add .quizfile extension to string
+    strtok(quizName, "\n");
     strcat(quizName, ".quizfile");
 
     //opening quiz file stream r
@@ -77,6 +78,7 @@ int grader()
 	//create a grades/quizname/overall.grade file to store calculations
     char gradeFile[300]="grades/";
     strcat(gradeFile, temp);
+    strtok(gradeFile, "\n");
     strcat(gradeFile, "/");
     make_directory(gradeFile);
     strcat(gradeFile, "overall.grade");
@@ -95,6 +97,7 @@ int grader()
     make_directory("quizDump");
     char dumpFile[300]="quizDump/";
     strcat(dumpFile, temp);
+    strtok(dumpFile, "\n");
     strcat(dumpFile, ".dump");
     dumpFP = fopen(dumpFile, "w");
     if (dumpFP == NULL)
@@ -109,6 +112,7 @@ int grader()
     //creating string for results directory
     char resultsDir[300]="results/";
     strcat(resultsDir, temp);
+    strtok(resultsDir, "\n");
     strcat(resultsDir, "/");
 
     //checking if results-quizname/ directory can open and opening if it exists
@@ -166,6 +170,7 @@ int grader()
         //opening filestream for individual results
         char studentID[300]="grades/";
         strcat(studentID, temp);
+        strtok(studentID, "\n");
         strcat(studentID, "/");
         strcat(studentID, in_file->d_name);
         int studentIDLen = strlen(studentID);
