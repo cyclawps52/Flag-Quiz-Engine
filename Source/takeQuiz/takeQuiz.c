@@ -41,7 +41,7 @@ int takeQuiz(char studentID[])
 	if(quiz==NULL)
 	{
 		printf("There was an error opening the quiz file.\n");
-		printf("Program is exiting.\n");
+		pete();
 		return 1;
 	}
 
@@ -82,7 +82,7 @@ int takeQuiz(char studentID[])
 	if(results==NULL)
 	{
 		printf("There was an error creating a file to store results.\n");
-		printf("Program is exiting.\n");
+		pete();
 		return 1;
 	}
 
@@ -191,9 +191,7 @@ int takeQuiz(char studentID[])
 		printf("Flag:\t%s\n", flagBox);
 		line();
 	}
-	printf("Press ENTER to exit.\n");
-	fflush(stdin);
-	getchar();
+	pete();
 
 	fclose(quiz);
 	fclose(results);
