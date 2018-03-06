@@ -72,6 +72,7 @@ int takeQuiz(char studentID[])
 		printf("\tStudentID: %s\n", studentID);
 		printf("\tQuiz: %s\n", temp);
 		printf("If this is in error, please contact the administrator.\n");
+		pete();
 		fclose(results);
 		return 1;
 	}
